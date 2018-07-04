@@ -5,6 +5,11 @@ module Api
         render json: Cocktail.all
       end
 
+      def create
+        @cocktail = Cocktail.create(cocktail_params)
+        render json: @cocktail
+      end
+
       def show
         cocktail = Cocktail.find(params[:id])
 
@@ -40,6 +45,12 @@ module Api
 
       def destroy
 
+      end
+
+      private
+
+      def cocktail_params
+        params.require(:cocktail).permit(:name, :description)
       end
     end
   end
